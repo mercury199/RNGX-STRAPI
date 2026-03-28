@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "instructors",
+  "info": {
+    "singularName": "instructor",
+    "pluralName": "instructors",
+    "displayName": "instructor"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "instructor_experiences": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::experience.experience",
+      "mappedBy": "experience_instructors"
+    },
+    "instructor_first_name": {
+      "type": "string"
+    },
+    "instructor_last_name": {
+      "type": "string"
+    },
+    "instructor_email": {
+      "type": "email"
+    },
+    "instructor_phone": {
+      "type": "string"
+    },
+    "instructor_social_medias": {
+      "type": "component",
+      "component": "shared.social-media-links",
+      "repeatable": true
+    },
+    "instructor_headshot": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "instructor_web_link": {
+      "type": "string"
+    }
+  }
+}

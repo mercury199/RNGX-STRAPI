@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_shared_faqs",
+  "info": {
+    "displayName": "faqs",
+    "icon": "hashtag"
+  },
+  "options": {},
+  "attributes": {
+    "faqs_question": {
+      "type": "string"
+    },
+    "faqs_answer": {
+      "type": "richtext"
+    }
+  },
+  "config": {}
+}

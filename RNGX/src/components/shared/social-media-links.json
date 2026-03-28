@@ -1,0 +1,48 @@
+{
+  "collectionName": "components_shared_social_media_links",
+  "info": {
+    "displayName": "social_media_links",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "social_platform": {
+      "type": "enumeration",
+      "enum": [
+        "Email",
+        "Phone#",
+        "Website",
+        "LinkTree",
+        "Facebook",
+        "YouTube",
+        "WhatsApp",
+        "Instagram",
+        "WeChat",
+        "TikTok",
+        "Telegram",
+        "Snapchat",
+        "X (formerly Twitter)",
+        "Pinterest",
+        "Reddit",
+        "LinkedIn",
+        "Discord",
+        "Threads",
+        "Kuaishou",
+        "QQ",
+        "Quora",
+        "Tumblr",
+        "Line",
+        "BeReal",
+        "Twitch",
+        "Viber",
+        "VK (VKontakte)",
+        "Mastodon",
+        "Clubhouse"
+      ]
+    },
+    "social_link": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

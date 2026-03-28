@@ -1,0 +1,92 @@
+{
+  "kind": "collectionType",
+  "collectionName": "experiences",
+  "info": {
+    "singularName": "experience",
+    "pluralName": "experiences",
+    "displayName": "experience"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "experience_name": {
+      "type": "string"
+    },
+    "experience_id": {
+      "type": "uid",
+      "targetField": "experience_name"
+    },
+    "experience_start_date": {
+      "type": "date"
+    },
+    "experience_start_time": {
+      "type": "time"
+    },
+    "experience_end_time": {
+      "type": "time"
+    },
+    "experience_end_date_if_different": {
+      "type": "date"
+    },
+    "experience_type": {
+      "type": "enumeration",
+      "enum": [
+        "class",
+        "seminar",
+        "competition",
+        "panel",
+        "certification"
+      ]
+    },
+    "experience_competition_division": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "experience_type"
+            },
+            "competition"
+          ]
+        }
+      },
+      "enum": [
+        "Division A",
+        "Division B"
+      ]
+    },
+    "experience_instructors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::instructor.instructor",
+      "inversedBy": "instructor_experiences"
+    },
+    "experience_valid_user_tiers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-tier.user-tier"
+    },
+    "experience_requires_additional_purchase": {
+      "type": "boolean",
+      "default": false
+    },
+    "experience_additional_purchase_cost": {
+      "type": "decimal",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "experience_requires_additional_purchase"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "experience_external_linking_id": {
+      "type": "string"
+    }
+  }
+}

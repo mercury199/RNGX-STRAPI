@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_valid_dates",
+  "info": {
+    "displayName": "valid_dates",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "valid_date": {
+      "type": "date"
+    }
+  },
+  "config": {}
+}

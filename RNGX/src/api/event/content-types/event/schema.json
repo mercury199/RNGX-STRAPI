@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "event"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "event_name": {
+      "type": "string"
+    },
+    "vendors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::vendor.vendor",
+      "inversedBy": "vendor_events"
+    },
+    "user_tiers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::user-tier.user-tier",
+      "inversedBy": "user_tier_events"
+    }
+  }
+}

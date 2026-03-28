@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "venue_locations",
+  "info": {
+    "singularName": "venue-location",
+    "pluralName": "venue-locations",
+    "displayName": "venue_location"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "venue_location_name": {
+      "type": "string"
+    },
+    "venue": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::venue.venue"
+    }
+  }
+}

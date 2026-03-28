@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sponsors",
+  "info": {
+    "singularName": "sponsor",
+    "pluralName": "sponsors",
+    "displayName": "sponsor"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sponsor_name": {
+      "type": "string"
+    },
+    "sponsor_tile_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "sponsor_hero_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "sponsor_website_link": {
+      "type": "string"
+    },
+    "sponsor_social_medias": {
+      "type": "component",
+      "component": "shared.social-media-links",
+      "repeatable": true
+    },
+    "sponsor_about": {
+      "type": "richtext"
+    },
+    "sponsor_tier": {
+      "type": "enumeration",
+      "enum": [
+        "title_sponsor",
+        "major_sponsor",
+        "sponsor",
+        "minor_sponsor"
+      ]
+    }
+  }
+}
