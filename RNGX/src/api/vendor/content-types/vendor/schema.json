@@ -58,6 +58,11 @@
       "relation": "manyToMany",
       "target": "api::event.event",
       "mappedBy": "event_vendors"
+    },
+    "vendor_badges": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::badge.badge"
     }
   }
 }

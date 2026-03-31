@@ -80,6 +80,9 @@
       "relation": "oneToMany",
       "target": "api::badge.badge",
       "mappedBy": "badge_owner"
+    },
+    "user_notification_token": {
+      "type": "string"
     }
   }
 }

@@ -1020,6 +1020,7 @@ export interface ApiVendorVendor extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     vendor_about: Schema.Attribute.RichText;
+    vendor_badges: Schema.Attribute.Relation<'oneToMany', 'api::badge.badge'>;
     vendor_booth_location: Schema.Attribute.String;
     vendor_contact_info: Schema.Attribute.Component<
       'shared.contact-info',
@@ -1592,6 +1593,7 @@ export interface PluginUsersPermissionsUser
     USER_DOB: Schema.Attribute.Date;
     user_first_name: Schema.Attribute.String;
     user_last_name: Schema.Attribute.String;
+    user_notification_token: Schema.Attribute.String;
     username: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
