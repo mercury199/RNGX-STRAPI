@@ -109,6 +109,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::badge.badge"
+    },
+    "experience_description": {
+      "type": "richtext"
     }
   }
 }

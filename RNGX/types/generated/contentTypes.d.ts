@@ -703,6 +703,7 @@ export interface ApiExperienceExperience extends Struct.CollectionTypeSchema {
     experience_competition_division: Schema.Attribute.Enumeration<
       ['Division A', 'Division B', 'All']
     >;
+    experience_description: Schema.Attribute.RichText;
     experience_end_date_if_different: Schema.Attribute.Date;
     experience_end_time: Schema.Attribute.Time;
     experience_external_linking_id: Schema.Attribute.String;
