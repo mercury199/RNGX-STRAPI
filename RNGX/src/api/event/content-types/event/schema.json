@@ -14,17 +14,29 @@
     "event_name": {
       "type": "string"
     },
-    "vendors": {
+    "event_vendors": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::vendor.vendor",
       "inversedBy": "vendor_events"
     },
-    "user_tiers": {
+    "badge_tiers": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::user-tier.user-tier",
-      "inversedBy": "user_tier_events"
+      "inversedBy": "badge_tier_events"
+    },
+    "event_sponsors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sponsor.sponsor",
+      "inversedBy": "sponsor_events"
+    },
+    "event_faq": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::faq.faq",
+      "inversedBy": "faq_event"
     }
   }
 }

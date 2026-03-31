@@ -57,7 +57,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::event.event",
-      "mappedBy": "vendors"
+      "mappedBy": "event_vendors"
     }
   }
 }

@@ -17,7 +17,8 @@
     "faq_event": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::event.event"
+      "target": "api::event.event",
+      "mappedBy": "event_faq"
     },
     "faq_header_text": {
       "type": "string"

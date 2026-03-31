@@ -43,6 +43,11 @@
     },
     "instructor_web_link": {
       "type": "string"
+    },
+    "instructor_badge": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::badge.badge"
     }
   }
 }

@@ -531,6 +531,48 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBadgeBadge extends Struct.CollectionTypeSchema {
+  collectionName: 'badges';
+  info: {
+    displayName: 'badge';
+    pluralName: 'badges';
+    singularName: 'badge';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    badge_attendee_experiences: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::experience.experience'
+    >;
+    badge_event: Schema.Attribute.Relation<'oneToOne', 'api::event.event'>;
+    badge_owner: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    badge_tiers: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-tier.user-tier'
+    >;
+    bage_id: Schema.Attribute.UID;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    experiences: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::experience.experience'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::badge.badge'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -604,10 +646,23 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    badge_tiers: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::user-tier.user-tier'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    event_faq: Schema.Attribute.Relation<'oneToOne', 'api::faq.faq'>;
     event_name: Schema.Attribute.String;
+    event_sponsors: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::sponsor.sponsor'
+    >;
+    event_vendors: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::vendor.vendor'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
@@ -615,11 +670,6 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user_tiers: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::user-tier.user-tier'
-    >;
-    vendors: Schema.Attribute.Relation<'manyToMany', 'api::vendor.vendor'>;
   };
 }
 
@@ -637,9 +687,21 @@ export interface ApiExperienceExperience extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    experience_actual_attendees: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::badge.badge'
+    >;
     experience_additional_purchase_cost: Schema.Attribute.Decimal;
+    experience_attendee_waitlist: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::badge.badge'
+    >;
+    experience_attendees: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::badge.badge'
+    >;
     experience_competition_division: Schema.Attribute.Enumeration<
-      ['Division A', 'Division B']
+      ['Division A', 'Division B', 'All']
     >;
     experience_end_date_if_different: Schema.Attribute.Date;
     experience_end_time: Schema.Attribute.Time;
@@ -649,13 +711,21 @@ export interface ApiExperienceExperience extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::instructor.instructor'
     >;
+    experience_max_attendees: Schema.Attribute.Integer;
     experience_name: Schema.Attribute.String;
     experience_requires_additional_purchase: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     experience_start_date: Schema.Attribute.Date;
     experience_start_time: Schema.Attribute.Time;
     experience_type: Schema.Attribute.Enumeration<
-      ['class', 'seminar', 'competition', 'panel', 'certification']
+      [
+        'class',
+        'seminar',
+        'competition',
+        'panel',
+        'certification',
+        'trade show / vendor hall',
+      ]
     >;
     experience_valid_user_tiers: Schema.Attribute.Relation<
       'oneToMany',
@@ -749,6 +819,7 @@ export interface ApiInstructorInstructor extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    instructor_badge: Schema.Attribute.Relation<'oneToOne', 'api::badge.badge'>;
     instructor_email: Schema.Attribute.Email;
     instructor_experiences: Schema.Attribute.Relation<
       'manyToMany',
@@ -798,6 +869,7 @@ export interface ApiSponsorSponsor extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     sponsor_about: Schema.Attribute.RichText;
+    sponsor_events: Schema.Attribute.Relation<'manyToMany', 'api::event.event'>;
     sponsor_hero_image: Schema.Attribute.Media<'images'>;
     sponsor_name: Schema.Attribute.String;
     sponsor_social_medias: Schema.Attribute.Component<
@@ -885,7 +957,7 @@ export interface ApiStaffMemberStaffMember extends Struct.CollectionTypeSchema {
 export interface ApiUserTierUserTier extends Struct.CollectionTypeSchema {
   collectionName: 'user_tiers';
   info: {
-    displayName: 'user_tier';
+    displayName: 'badge_tier';
     pluralName: 'user-tiers';
     singularName: 'user-tier';
   };
@@ -893,6 +965,17 @@ export interface ApiUserTierUserTier extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    badge_tier_events: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::event.event'
+    >;
+    badge_tier_id: Schema.Attribute.UID;
+    badge_tier_name: Schema.Attribute.String;
+    badge_tier_special_identifiers: Schema.Attribute.Text;
+    badge_tier_valid_dates: Schema.Attribute.Component<
+      'shared.valid-dates',
+      true
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -906,17 +989,6 @@ export interface ApiUserTierUserTier extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user_tier_events: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::event.event'
-    >;
-    user_tier_id: Schema.Attribute.UID<'user_tier_name'>;
-    user_tier_name: Schema.Attribute.String;
-    user_tier_special_identifiers: Schema.Attribute.Text;
-    user_tier_valid_dates: Schema.Attribute.Component<
-      'shared.valid-dates',
-      true
-    >;
     vendor_hall_limited_access: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
   };
@@ -991,6 +1063,7 @@ export interface ApiVenueLocationVenueLocation
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     venue: Schema.Attribute.Relation<'oneToOne', 'api::venue.venue'>;
+    venue_location_directions: Schema.Attribute.RichText;
     venue_location_name: Schema.Attribute.String;
   };
 }
@@ -1481,7 +1554,6 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1516,6 +1588,10 @@ export interface PluginUsersPermissionsUser
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    user_badges: Schema.Attribute.Relation<'oneToMany', 'api::badge.badge'>;
+    USER_DOB: Schema.Attribute.Date;
+    user_first_name: Schema.Attribute.String;
+    user_last_name: Schema.Attribute.String;
     username: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -1539,6 +1615,7 @@ declare module '@strapi/strapi' {
       'api::about.about': ApiAboutAbout;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
+      'api::badge.badge': ApiBadgeBadge;
       'api::category.category': ApiCategoryCategory;
       'api::coupon.coupon': ApiCouponCoupon;
       'api::event.event': ApiEventEvent;

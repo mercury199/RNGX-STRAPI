@@ -47,6 +47,12 @@
         "sponsor",
         "minor_sponsor"
       ]
+    },
+    "sponsor_events": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "mappedBy": "event_sponsors"
     }
   }
 }

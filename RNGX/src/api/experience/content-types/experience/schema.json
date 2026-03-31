@@ -37,7 +37,8 @@
         "seminar",
         "competition",
         "panel",
-        "certification"
+        "certification",
+        "trade show / vendor hall"
       ]
     },
     "experience_competition_division": {
@@ -54,7 +55,8 @@
       },
       "enum": [
         "Division A",
-        "Division B"
+        "Division B",
+        "All"
       ]
     },
     "experience_instructors": {
@@ -87,6 +89,26 @@
     },
     "experience_external_linking_id": {
       "type": "string"
+    },
+    "experience_max_attendees": {
+      "type": "integer"
+    },
+    "experience_attendees": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::badge.badge",
+      "mappedBy": "badge_attendee_experiences"
+    },
+    "experience_attendee_waitlist": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::badge.badge",
+      "mappedBy": "experiences"
+    },
+    "experience_actual_attendees": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::badge.badge"
     }
   }
 }
