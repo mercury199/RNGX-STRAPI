@@ -41,6 +41,21 @@
       "relation": "manyToMany",
       "target": "api::experience.experience",
       "inversedBy": "experience_attendee_waitlist"
+    },
+    "badge_email": {
+      "type": "email"
+    },
+    "badge_activation_code": {
+      "type": "string"
+    },
+    "badge_activation_status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "active",
+        "revoked",
+        "disabled"
+      ]
     }
   }
 }

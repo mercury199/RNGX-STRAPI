@@ -112,6 +112,12 @@
     },
     "experience_description": {
       "type": "richtext"
+    },
+    "experience_venue_location": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::venue-location.venue-location",
+      "inversedBy": "experiences_at_venue_location"
     }
   }
 }

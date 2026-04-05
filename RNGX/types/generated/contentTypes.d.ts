@@ -542,10 +542,15 @@ export interface ApiBadgeBadge extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    badge_activation_code: Schema.Attribute.String;
+    badge_activation_status: Schema.Attribute.Enumeration<
+      ['pending', 'active', 'revoked', 'disabled']
+    >;
     badge_attendee_experiences: Schema.Attribute.Relation<
       'manyToMany',
       'api::experience.experience'
     >;
+    badge_email: Schema.Attribute.Email;
     badge_event: Schema.Attribute.Relation<'oneToOne', 'api::event.event'>;
     badge_owner: Schema.Attribute.Relation<
       'manyToOne',
@@ -731,6 +736,10 @@ export interface ApiExperienceExperience extends Struct.CollectionTypeSchema {
     experience_valid_user_tiers: Schema.Attribute.Relation<
       'oneToMany',
       'api::user-tier.user-tier'
+    >;
+    experience_venue_location: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::venue-location.venue-location'
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -1054,6 +1063,10 @@ export interface ApiVenueLocationVenueLocation
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    experiences_at_venue_location: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::experience.experience'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

@@ -21,6 +21,12 @@
     },
     "venue_location_directions": {
       "type": "richtext"
+    },
+    "experiences_at_venue_location": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::experience.experience",
+      "mappedBy": "experience_venue_location"
     }
   }
 }
