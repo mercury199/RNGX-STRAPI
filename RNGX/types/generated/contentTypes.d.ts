@@ -711,6 +711,7 @@ export interface ApiExperienceExperience extends Struct.CollectionTypeSchema {
     experience_description: Schema.Attribute.RichText;
     experience_end_date_if_different: Schema.Attribute.Date;
     experience_end_time: Schema.Attribute.Time;
+    experience_event: Schema.Attribute.Relation<'oneToOne', 'api::event.event'>;
     experience_external_linking_id: Schema.Attribute.String;
     experience_id: Schema.Attribute.UID<'experience_name'>;
     experience_instructors: Schema.Attribute.Relation<
