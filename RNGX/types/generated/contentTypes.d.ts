@@ -531,6 +531,39 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBadgeScanBadgeScan extends Struct.CollectionTypeSchema {
+  collectionName: 'badge_scans';
+  info: {
+    displayName: 'badge_scan';
+    pluralName: 'badge-scans';
+    singularName: 'badge-scan';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::badge-scan.badge-scan'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    scan_id: Schema.Attribute.UID;
+    scan_type: Schema.Attribute.Enumeration<
+      ['vendor', 'experience', 'competition', 'entrance', 'other']
+    >;
+    scanned_badge: Schema.Attribute.Relation<'oneToOne', 'api::badge.badge'>;
+    scanner_badge: Schema.Attribute.Relation<'oneToOne', 'api::badge.badge'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBadgeBadge extends Struct.CollectionTypeSchema {
   collectionName: 'badges';
   info: {
@@ -1632,6 +1665,7 @@ declare module '@strapi/strapi' {
       'api::about.about': ApiAboutAbout;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
+      'api::badge-scan.badge-scan': ApiBadgeScanBadgeScan;
       'api::badge.badge': ApiBadgeBadge;
       'api::category.category': ApiCategoryCategory;
       'api::coupon.coupon': ApiCouponCoupon;
